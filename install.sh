@@ -3,7 +3,7 @@
 # Idempotent: first run clones+builds+starts; subsequent runs pull+rebuild+restart.
 set -euo pipefail
 
-REPO_URL="${REPO_URL:-https://github.com/sturvi4-cell/reminder.git}"
+REPO_URL="${REPO_URL:-https://github.com/sturvi4-cell/Reminder.git}"
 BRANCH="${BRANCH:-main}"
 APP_DIR="${APP_DIR:-$HOME/Reminder}"
 IMAGE="reminder-bot:latest"
