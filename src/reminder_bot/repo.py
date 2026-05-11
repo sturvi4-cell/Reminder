@@ -12,6 +12,10 @@ from .tz_utils import iso, now_utc
 
 # -------- users --------
 
+async def get_user(session: AsyncSession, telegram_id: int) -> Optional[User]:
+    return await session.get(User, telegram_id)
+
+
 async def upsert_user(session: AsyncSession, telegram_id: int, username: Optional[str], chat_id: int) -> User:
     user = await session.get(User, telegram_id)
     if user is None:

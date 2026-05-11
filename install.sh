@@ -34,7 +34,7 @@ if [ ! -f .env ]; then
   cp .env.example .env
   echo ""
   echo "!! Создан .env из .env.example."
-  echo "!! Заполните BOT_TOKEN, OPENROUTER_API_KEY, WHITELIST_USER_IDS и запустите снова:"
+  echo "!! Заполните BOT_TOKEN, OPENROUTER_API_KEY, REGISTRATION_SECRET и запустите снова:"
   echo "   bash install.sh"
   exit 0
 fi

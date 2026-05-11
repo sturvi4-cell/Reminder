@@ -14,13 +14,15 @@ router = Router(name="commands")
 
 HELP_TEXT = (
     "<b>Reminder Bot</b>\n\n"
-    "Пиши свободным текстом, когда тебе напомнить. Примеры:\n"
+    "Пиши свободным текстом, когда тебе напомнить (RU / AZ / EN):\n"
     "• <code>сегодня в 18:00 позвонить маме</code>\n"
     "• <code>завтра в 9 утра планёрка</code>\n"
     "• <code>через 30 минут проверить духовку</code>\n"
     "• <code>каждый день в 22:00 принять таблетку</code>\n"
     "• <code>каждый понедельник в 9 утра тренировка</code>\n"
-    "• <code>каждый будний день в 8:30 зарядка</code>\n\n"
+    "• <code>sabah saat 15:00 ana zəng et</code>\n"
+    "• <code>hər gün saat 22:00 dərmanı qəbul et</code>\n"
+    "• <code>tomorrow at 9am standup</code>\n\n"
     "<b>Команды:</b>\n"
     "/list — мои активные напоминания\n"
     "/cancel <id> — удалить по ID\n"
@@ -32,6 +34,8 @@ HELP_TEXT = (
 
 @router.message(CommandStart())
 async def cmd_start(message: Message) -> None:
+    # Auth middleware ensures only registered users reach handlers.
+    # Refresh chat_id/username in case they changed.
     async with session_scope() as session:
         await repo.upsert_user(
             session,
@@ -39,7 +43,7 @@ async def cmd_start(message: Message) -> None:
             username=message.from_user.username,
             chat_id=message.chat.id,
         )
-    await message.answer("Привет! Ты зарегистрирован. " + HELP_TEXT)
+    await message.answer("Привет! " + HELP_TEXT)
 
 
 @router.message(Command("help"))
